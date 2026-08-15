@@ -89,7 +89,7 @@
     background: var(--paper-2);
     border: 1px solid var(--rule);
     border-radius: 4px;
-    padding: 1.3rem 1.6rem;
+    padding: 1.3rem 1.6rem 1.6rem;
     margin-bottom: 3.6rem;
   }
   nav.toc .toc-title {
@@ -98,26 +98,79 @@
     font-size: 0.95rem;
     letter-spacing: 0.18em;
     color: var(--seal);
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.1rem;
   }
-  nav.toc ol { list-style: none; margin: 0; padding: 0; counter-reset: entry; }
-  nav.toc li {
-    counter-increment: entry;
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+    gap: 1.1rem 1rem;
+  }
+  .toc-card {
     display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    padding: 0.32rem 0;
-    border-bottom: 1px dotted var(--rule);
-    font-size: 0.92rem;
+    flex-direction: column;
+    color: var(--ink);
+    text-decoration: none;
   }
-  nav.toc li:last-child { border-bottom: none; }
-  nav.toc a { color: var(--ink); text-decoration: none; flex: 1; }
-  nav.toc a:hover { color: var(--seal); }
-  nav.toc .toc-date {
+  .toc-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 1px solid var(--rule);
+    margin-bottom: 0.55rem;
+    background: var(--paper);
+    transition: border-color 0.2s ease;
+  }
+  .toc-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .toc-card:hover .toc-thumb { border-color: var(--seal); }
+  .toc-card:hover .toc-thumb img { transform: scale(1.06); }
+  .toc-num-badge {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+    width: 1.7em;
+    height: 1.7em;
+    border-radius: 50%;
+    background: var(--seal);
+    color: var(--paper);
+    font-family: "Batang", "바탕", serif;
+    font-weight: bold;
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.28);
+  }
+  .toc-card-title {
+    font-family: "Batang", "바탕", "Noto Serif KR", serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    margin-bottom: 0.2rem;
+    transition: color 0.2s ease;
+  }
+  .toc-card:hover .toc-card-title { color: var(--seal); }
+  .toc-card-hook {
+    font-size: 0.76rem;
     color: var(--ink-soft);
-    font-size: 0.8rem;
+    line-height: 1.45;
+    margin-bottom: 0.3rem;
+  }
+  .toc-card-date {
+    font-size: 0.7rem;
+    color: var(--seal);
     font-variant-numeric: tabular-nums;
-    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 420px) {
+    .toc-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   article {
@@ -197,18 +250,68 @@
 
   <nav class="toc" id="toc">
     <div class="toc-title">목차</div>
-    <ol>
-      <li><a href="#p1">#1. 그리움</a><span class="toc-date">2026.4.15</span></li>
-      <li><a href="#p2">#2. 즐거운 나의 첫경험</a><span class="toc-date">2026.4.21</span></li>
-      <li><a href="#p3">#3. 써니 그리고 준비</a><span class="toc-date">2026.4.26</span></li>
-      <li><a href="#p4">#4. 써니</a><span class="toc-date">2026.7.3</span></li>
-      <li><a href="#p5">#5. YS</a><span class="toc-date">2026.7.9</span></li>
-      <li><a href="#p6">#6. EJ</a><span class="toc-date">2026.7.16</span></li>
-      <li><a href="#p7">#7. YS 현재</a><span class="toc-date">2026.8.1</span></li>
-      <li><a href="#p8">#8. 써니 그 즈음</a><span class="toc-date">2026.8.4</span></li>
-      <li><a href="#p9">#9. EJ 그리고 굳은살</a><span class="toc-date">2026.8.7</span></li>
-      <li><a href="#p10">#10. 화양연화</a><span class="toc-date">2026.8.15</span></li>
-    </ol>
+    <div class="toc-grid">
+      <a class="toc-card" href="#p1">
+        <span class="toc-thumb"><span class="toc-num-badge">01</span><img src="01_그리움_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">그리움</span>
+        <span class="toc-card-hook">도시락 셋과 노란 봉고, 그리운 그 시절</span>
+        <span class="toc-card-date">2026.4.15</span>
+      </a>
+      <a class="toc-card" href="#p2">
+        <span class="toc-thumb"><span class="toc-num-badge">02</span><img src="02_즐거운_나의_첫경험_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">즐거운 나의 첫경험</span>
+        <span class="toc-card-hook">무너진 아버지의 사업과 첫 경험의 기억</span>
+        <span class="toc-card-date">2026.4.21</span>
+      </a>
+      <a class="toc-card" href="#p3">
+        <span class="toc-thumb"><span class="toc-num-badge">03</span><img src="03_써니_그리고_준비_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">써니 그리고 준비</span>
+        <span class="toc-card-hook">남편을 먼저 보내고, 딸이 건넨 위로</span>
+        <span class="toc-card-date">2026.4.26</span>
+      </a>
+      <a class="toc-card" href="#p4">
+        <span class="toc-thumb"><span class="toc-num-badge">04</span><img src="04_써니_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">써니</span>
+        <span class="toc-card-hook">봄날, 목에서 발견된 작은 그림자</span>
+        <span class="toc-card-date">2026.7.3</span>
+      </a>
+      <a class="toc-card" href="#p5">
+        <span class="toc-thumb"><span class="toc-num-badge">05</span><img src="05_YS_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">YS</span>
+        <span class="toc-card-hook">피난길, 친정에서 삼킨 누룽지 한 조각</span>
+        <span class="toc-card-date">2026.7.9</span>
+      </a>
+      <a class="toc-card" href="#p6">
+        <span class="toc-thumb"><span class="toc-num-badge">06</span><img src="06_EJ_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">EJ</span>
+        <span class="toc-card-hook">카페 창밖 차들 사이로 들은 그 말</span>
+        <span class="toc-card-date">2026.7.16</span>
+      </a>
+      <a class="toc-card" href="#p7">
+        <span class="toc-thumb"><span class="toc-num-badge">07</span><img src="07_YS_현재_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">YS 현재</span>
+        <span class="toc-card-hook">여든둘에 멈춘 기억, 다시 뜨는 해</span>
+        <span class="toc-card-date">2026.8.1</span>
+      </a>
+      <a class="toc-card" href="#p8">
+        <span class="toc-thumb"><span class="toc-num-badge">08</span><img src="08_써니_그_즈음_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">써니 그 즈음</span>
+        <span class="toc-card-hook">회복실에서, 남편이 사 온 요거트 열 개</span>
+        <span class="toc-card-date">2026.8.4</span>
+      </a>
+      <a class="toc-card" href="#p9">
+        <span class="toc-thumb"><span class="toc-num-badge">09</span><img src="09_EJ_그리고_굳은살_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">EJ 그리고 굳은살</span>
+        <span class="toc-card-hook">혼자 키운 두 아들, 손에 남은 굳은살</span>
+        <span class="toc-card-date">2026.8.7</span>
+      </a>
+      <a class="toc-card" href="#p10">
+        <span class="toc-thumb"><span class="toc-num-badge">10</span><img src="10_화양연화_표지.png" alt="" loading="lazy"></span>
+        <span class="toc-card-title">화양연화</span>
+        <span class="toc-card-hook">구름 위, 짧았던 화양연화</span>
+        <span class="toc-card-date">2026.8.15</span>
+      </a>
+    </div>
   </nav>
 
   <article id="p1">
